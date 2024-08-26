@@ -1,30 +1,20 @@
 <!-- @Layout:Base -->
-<div class="Controls default-grid">
-  <LanguageSelect locales="{locales}" />
-</div>
-
-<div id="site-header" class="site-header">
-  <div class="default-grid">
-    <div class="tool-header">
-      <div class="tool-header-name">
-        WCAG-EM R<span class="display-phablet">eport </span>T<span class="display-phablet">ool</span>
-      </div>
-      <div class="tool-header-logo">
-        <a href="http://w3.org/"><img
-            alt="W3C"
-            src={`${$basepath}/images/w3c.svg`}
-            width="50"
-            height="24"
-          /></a>
-        <a href="http://w3.org/WAI/"><img
-            alt="Web Accessibility Initiative"
-            src={`${$basepath}/images/wai.svg`}
-            width="90"
-            height="24"
-          /></a>
-      </div>
-    </div>
-  </div>
+<div id="site-header">
+  <a href="https://dunhamweb.com/"><img
+    alt="Dunham Web"
+    src={`${$basepath}/images/dunham.svg`}
+  /></a>
+  <span style="font-size: xx-large;">WCAG-EM Report Tool</span>
+  <span>
+    <a href="http://w3.org/"><img
+      alt="W3C"
+      src={`${$basepath}/images/w3c.svg`}
+    /></a>
+  <a href="https://w3.org/WAI/"><img
+      alt="Web Accessibility Initiative"
+      src={`${$basepath}/images/wai.svg`}
+    /></a>
+  </span>
 </div>
 
 <NavigationBar />
@@ -38,12 +28,6 @@
 <!-- /@Layout -->
 
 <style>
-  .site-header .tool-header {
-    grid-column: 2 / 10;
-    width: 100%;
-    display: flex;
-    align-items: center;
-  }
   .BaseLayout {
     padding: 2em 1em;
   }
@@ -56,6 +40,17 @@
     .BaseLayout {
       padding: 2em 0;
     }
+  }
+
+  #site-header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 1em;
+  }
+
+  #site-header img{
+    height: 4em;
   }
 </style>
 
