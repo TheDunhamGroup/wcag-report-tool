@@ -1,5 +1,8 @@
 <Page title="{$summaryStore['EVALUATION_TITLE'] ? $summaryStore['EVALUATION_TITLE'] : TRANSLATED.PAGE_TITLE}" pageid="view-report">
 
+    <Button on:click="{handleDOCXDownloadClick}">
+      <span>{TRANSLATED.BUTTON_SAVE_DOCX}</span>
+    </Button>
     <Button on:click="{handleHTMLDownloadClick}">
       <span>{TRANSLATED.BUTTON_SAVE_HTML}</span>
     </Button>
@@ -37,6 +40,7 @@
 
   $: TRANSLATED = {
     PAGE_TITLE: $translate('PAGES.REPORT.TITLE'),
+    BUTTON_SAVE_DOCX: $translate('PAGES.REPORT.BTN_SAVE_DOCX'),
     BUTTON_SAVE_HTML: $translate('PAGES.REPORT.BTN_SAVE_HTML'),
     BUTTON_SAVE_JSON: $translate('PAGES.REPORT.BTN_SAVE_JSON')
   };
@@ -57,6 +61,10 @@
   function handleJSONDownloadClick() {
     updateEvaluation();
     $evaluationStore.save();
+  }
+
+  function handleDOCXDownloadClick() {
+    // TODO
   }
 
 </script>

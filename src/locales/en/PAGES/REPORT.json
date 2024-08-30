@@ -1,5 +1,6 @@
 {
     "TITLE": "Report",
+    "BTN_SAVE_DOCX" : "Download Report (DOCX)",
     "BTN_SAVE_HTML": "Download Report (HTML)",
     "BTN_SAVE_JSON": "Download Report (JSON)",
     "HEADER_SUCCESS_CRITERION": "Success Criterion",
