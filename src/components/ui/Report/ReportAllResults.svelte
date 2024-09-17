@@ -59,11 +59,9 @@
               {#if sampleAssertions(criterion).length}
               {#each sampleAssertions(criterion) as assertion}
                 {#if assertionHasContents(assertion)}
-                  <h6>{assertion.subject.title || `Sample ${assertion.subject.ID}`}</h6>
                   {#if assertion.result.description}
+                    <h6>{assertion.subject.title || `Sample ${assertion.subject.ID}`}</h6>
                     {@html marked(assertion.result.description, {"sanitize": true})}
-                  {:else}
-                    <p>{TRANSLATED.NO_OBSERVATIONS_FOUND}</p>
                   {/if}
                 {/if}
               {/each}
