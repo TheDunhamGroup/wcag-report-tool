@@ -19,7 +19,7 @@
         * -->
         {#each guidelineCriteria(guideline) as criterion (criterion.num)}
           <tr class="Auditor__Assertion">
-            <th scope="row" class="Auditor__Assertion-SC" id={`criterion-${criterion.num.replaceAll('.', '')}`}>{criterion.num}: {TRANSLATED.CRITERIA[criterion.num].TITLE}</th>
+            <th scope="row" class="Auditor__Assertion-SC" id={`criterion-${criterion.num.replaceAll('.', '')}`}>{criterion.num}: {TRANSLATED.CRITERIA[criterion.num].TITLE}<br /><br /><hr /> {TRANSLATED.CRITERIA[criterion.num].DESCRIPTION}</th>
             <td>
                 {#each scopeAssertion(criterion) as assertion}
                   {#if sampleAssertions(criterion).length}
