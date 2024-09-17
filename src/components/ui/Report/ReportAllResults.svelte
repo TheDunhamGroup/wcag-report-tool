@@ -22,6 +22,7 @@
             <th scope="row" class="Auditor__Assertion-SC" id={`criterion-${criterion.num.replaceAll('.', '')}`}>{criterion.num}: {TRANSLATED.CRITERIA[criterion.num].TITLE}<br /><br /><hr /> {TRANSLATED.CRITERIA[criterion.num].DESCRIPTION}</th>
             <td>
                 {#each scopeAssertion(criterion) as assertion}
+                  <!-- If there are more than 0 pages in the sample list, show the "Entire Sample" header -->
                   {#if sampleAssertions(criterion).length}
                   <h6>{TRANSLATED.HEADING_SCOPE_RESULTS}</h6>
                   {/if}
@@ -182,6 +183,7 @@
     HEADING_SCOPE_RESULTS: $translate('PAGES.AUDIT.SAMPLE_FINDINGS'),
     HEADING_RESULTS_FOR: $translate('PAGES.AUDIT.RESULTS_FOR'),
     TEXT_NOT_CHECKED: $translate('UI.EARL.UNTESTED'),
+    TEXT_NOT_PRESENT: $translate('UI.EARL.INAPPLICABLE'),
     HEADER_SUCCESS_CRITERION: $translate('PAGES.REPORT.HEADER_SUCCESS_CRITERION'),
     HEADER_RESULT: $translate('PAGES.REPORT.HEADER_RESULT'),
     HEADER_OBSERVATIONS: $translate('PAGES.REPORT.HEADER_OBSERVATIONS'),
@@ -259,6 +261,6 @@
   }
 
   function assertionHasContents(assertion) {
-    return (assertion.result.outcome.title && assertion.result.outcome.title !== TRANSLATED.TEXT_NOT_CHECKED) || assertion.result.description
+    return (assertion.result.outcome.title && assertion.result.outcome.title !== TRANSLATED.TEXT_NOT_CHECKED && assertion.result.outcome.title !== TRANSLATED.TEXT_NOT_PRESENT) || assertion.result.description
   }
 </script>
