@@ -4,7 +4,25 @@
  * -->
 <div class="criterion" id={`criterion-${normaliseId(test)}`} data-version={version}>
   <header class="criterion-header">
-    <h3>{num}: {TRANSLATED.CRITERION.TITLE}</h3>
+    <h3>{num}: {TRANSLATED.CRITERION.TITLE}
+      {#if $assertions.filter((assertion) => {
+        return assertion?.test?.num.startsWith(num);
+      }).reduce((accumulator, assertion) => {
+        return accumulator && assertion.result.outcome.id != "earl:untested";
+      },
+      true
+      ) }
+        <svg aria-hidden="true" class="icon-info" style="color: green; float:right">
+          <use xlink:href={`${$basepath}/images/icons.svg#icon-check-circle`} />
+          <title>Completed</title>
+        </svg>
+      {:else}
+        <svg aria-hidden="true" class="icon-info" style="color: red; float:right">
+          <use xlink:href={`${$basepath}/images/icons.svg#icon-ex-circle`} />
+          <title>Incomplete</title>
+        </svg>
+      {/if}
+    </h3>
     <em class="criterion-header__level">Level {conformanceLevel}</em>
     <div class="criterion__resource-links">
 			{#if wcagVersion == '20'}
@@ -133,7 +151,9 @@
 
   import EarlResult from '@app/components/form/EarlResult.svelte';
   import ResourceLink from '@app/components/ui/ResourceLink.svelte';
-import Acknowledgements from '../../pages/Acknowledgements.svelte';
+  import Acknowledgements from '../../pages/Acknowledgements.svelte';
+  import assertions from '@app/stores/earl/assertionStore/index.js';
+  import { basepath } from '@app/stores/appStore.js';
 
   export let conformanceLevel;
   export let id;

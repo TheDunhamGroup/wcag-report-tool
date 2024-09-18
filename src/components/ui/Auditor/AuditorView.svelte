@@ -1,10 +1,48 @@
 <div class="AuditorView">
   {#each [...principles] as principle}
     <details open>
-      <summary><h2 id={`principle-${TRANSLATED.PRINCIPLES[principle].TITLE.toLowerCase()}`}>{principle} {TRANSLATED.PRINCIPLES[principle].TITLE}</h2></summary>
+      <summary>
+        <h2 id={`principle-${TRANSLATED.PRINCIPLES[principle].TITLE.toLowerCase()}`}>{principle} {TRANSLATED.PRINCIPLES[principle].TITLE}
+          {#if $assertions.filter((assertion) => {
+            return assertion?.test?.num.startsWith(principle);
+          }).reduce((accumulator, assertion) => {
+            return accumulator && assertion.result.outcome.id != "earl:untested";
+          },
+          true
+          ) }
+            <svg aria-hidden="true" class="icon-info" style="color: green; float:right">
+              <use xlink:href={`${$basepath}/images/icons.svg#icon-check-circle`} />
+              <title>Completed</title>
+            </svg>
+          {:else}
+            <svg aria-hidden="true" class="icon-info" style="color: red; float:right">
+              <use xlink:href={`${$basepath}/images/icons.svg#icon-ex-circle`} />
+              <title>Incomplete</title>
+            </svg>
+          {/if}
+        </h2>
+      </summary>
       {#each [...guidelines].filter((g) => g.indexOf(principle) === 0) as guideline}
         <details open>
-          <summary><h3>{guideline} {TRANSLATED.GUIDELINES[guideline].TITLE}</h3></summary>
+          <summary><h3>{guideline} {TRANSLATED.GUIDELINES[guideline].TITLE}
+            {#if $assertions.filter((assertion) => {
+              return assertion?.test?.num.startsWith(guideline);
+            }).reduce((accumulator, assertion) => {
+              return accumulator && assertion.result.outcome.id != "earl:untested";
+            },
+            true
+            ) }
+              <svg aria-hidden="true" class="icon-info" style="color: green; float:right">
+                <use xlink:href={`${$basepath}/images/icons.svg#icon-check-circle`} />
+                <title>Completed</title>
+              </svg>
+            {:else}
+              <svg aria-hidden="true" class="icon-info" style="color: red; float:right">
+                <use xlink:href={`${$basepath}/images/icons.svg#icon-ex-circle`} />
+                <title>Incomplete</title>
+              </svg>
+            {/if}
+          </h3></summary>
           <!--
            * Should filter assertions based on test prop;
            * assertion.test.num in case of wcag.
@@ -62,6 +100,8 @@
   import { getContext } from 'svelte';
 
   import Criterion from './Criterion.svelte';
+  import assertions from '@app/stores/earl/assertionStore/index.js';
+  import { basepath } from '@app/stores/appStore.js';
 
   export let criteria = [];
 
